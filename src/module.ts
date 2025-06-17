@@ -98,7 +98,11 @@ class BaneLands {
         if (!['food', 'water', 'arrows', 'torches'].includes(consumableType)) {
           throw new Error(`Invalid consumable type: ${consumableType}`);
         }
-        return await this.consumables.setResourceDie(actor, consumableType as ConsumableId, dieType);
+        return await this.consumables.setResourceDie(
+          actor,
+          consumableType as ConsumableId,
+          dieType
+        );
       },
 
       getResourceDie: (actor: Actor, consumableType: string): string | null => {
@@ -124,7 +128,11 @@ class BaneLands {
         if (!['food', 'water', 'arrows', 'torches'].includes(consumableType)) {
           throw new Error(`Invalid consumable type: ${consumableType}`);
         }
-        return await this.consumables.restoreConsumable(actor, consumableType as ConsumableId, amount);
+        return await this.consumables.restoreConsumable(
+          actor,
+          consumableType as ConsumableId,
+          amount
+        );
       },
 
       // Journey System (placeholder for future implementation)

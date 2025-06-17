@@ -17,7 +17,7 @@ declare global {
     };
   }
 
-  // Actor type for Foundry VTT  
+  // Actor type for Foundry VTT
   interface Actor {
     id: string;
     name: string;
@@ -40,7 +40,7 @@ declare global {
 
   interface ChatMessageConstructor {
     create(data: Record<string, unknown>): Promise<ChatMessage>;
-    new(): ChatMessage;
+    new (): ChatMessage;
   }
 
   // Constants interface
@@ -73,10 +73,10 @@ declare global {
     jQuery: unknown;
   }
 
-  // Global test environment variables  
+  // Global test environment variables
   const $: unknown;
   const jQuery: unknown;
-  
+
   // Make global variables available to tests
   var game: Game;
   var ui: UI;
@@ -99,7 +99,7 @@ declare global {
     foundry: unknown;
   }
 
-  // For Node.js compatibility  
+  // For Node.js compatibility
   var global: Global;
 }
 
