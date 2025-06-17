@@ -1,5 +1,7 @@
 // Foundry VTT hook registrations
 
+import type { ConsumableId } from './types/banelands-types';
+
 const MODULE_ID = 'banelands';
 
 export function registerHooks(): void {
@@ -23,7 +25,7 @@ export function registerHooks(): void {
   });
 
   // Render actor sheet hook - add consumable controls
-  Hooks.on('renderActorSheet', (app: any, html: HTMLElement) => {
+  Hooks.on('renderActorSheet', (app: { actor: Actor }, html: HTMLElement) => {
     if (app.actor.type !== 'character') return;
 
     // Add consumable display to character sheets
@@ -31,7 +33,7 @@ export function registerHooks(): void {
   });
 
   // Pre-update actor hook - handle consumable changes
-  Hooks.on('preUpdateActor', (actor: Actor, updateData: any) => {
+  Hooks.on('preUpdateActor', (actor: Actor, updateData: Record<string, unknown>) => {
     // Future: Add validation or automatic updates for consumable changes
     if (updateData.flags?.banelands?.consumables) {
       // Consumables updated for actor
@@ -42,7 +44,7 @@ export function registerHooks(): void {
 /**
  * Add consumable display to actor sheets
  */
-function addConsumableDisplay(app: any, html: HTMLElement): void {
+function addConsumableDisplay(app: { actor: Actor }, html: HTMLElement): void {
   const actor = app.actor;
   const consumableManager = game.banelands?.consumables;
 
@@ -100,7 +102,7 @@ function addConsumableDisplay(app: any, html: HTMLElement): void {
       event.preventDefault();
       const consumableType = (event.target as HTMLElement).dataset.consumable;
       if (consumableType && consumableManager) {
-        await consumableManager.useConsumable(actor, consumableType as any);
+        await consumableManager.useConsumable(actor, consumableType as ConsumableId);
         app.render(); // Re-render the sheet to update display
       }
     });
@@ -110,7 +112,7 @@ function addConsumableDisplay(app: any, html: HTMLElement): void {
 /**
  * Debug logging utility
  */
-export function debugLog(message: string, ...args: any[]): void {
+export function debugLog(message: string, ...args: unknown[]): void {
   if (game.settings.get(MODULE_ID, 'debugMode')) {
     // eslint-disable-next-line no-console
     console.log(`BaneLands Debug | ${message}`, ...args);

@@ -5,6 +5,7 @@ import { ConsumableManager } from './consumables/consumable-manager';
 import { ResourceDieSystem } from './consumables/resource-die-system';
 import { registerSettings } from './settings';
 import { registerHooks } from './hooks';
+import type { ConsumableId } from './types/banelands-types';
 
 // Module information
 // const MODULE_TITLE = 'BaneLands'; // For future use
@@ -97,14 +98,14 @@ class BaneLands {
         if (!['food', 'water', 'arrows', 'torches'].includes(consumableType)) {
           throw new Error(`Invalid consumable type: ${consumableType}`);
         }
-        return await this.consumables.setResourceDie(actor, consumableType as any, dieType);
+        return await this.consumables.setResourceDie(actor, consumableType as ConsumableId, dieType);
       },
 
       getResourceDie: (actor: Actor, consumableType: string): string | null => {
         if (!['food', 'water', 'arrows', 'torches'].includes(consumableType)) {
           throw new Error(`Invalid consumable type: ${consumableType}`);
         }
-        return this.consumables.getResourceDie(actor, consumableType as any);
+        return this.consumables.getResourceDie(actor, consumableType as ConsumableId);
       },
 
       // Consumables
@@ -112,7 +113,7 @@ class BaneLands {
         if (!['food', 'water', 'arrows', 'torches'].includes(consumableType)) {
           throw new Error(`Invalid consumable type: ${consumableType}`);
         }
-        return await this.consumables.useConsumable(actor, consumableType as any);
+        return await this.consumables.useConsumable(actor, consumableType as ConsumableId);
       },
 
       restoreConsumable: async (
@@ -123,7 +124,7 @@ class BaneLands {
         if (!['food', 'water', 'arrows', 'torches'].includes(consumableType)) {
           throw new Error(`Invalid consumable type: ${consumableType}`);
         }
-        return await this.consumables.restoreConsumable(actor, consumableType as any, amount);
+        return await this.consumables.restoreConsumable(actor, consumableType as ConsumableId, amount);
       },
 
       // Journey System (placeholder for future implementation)

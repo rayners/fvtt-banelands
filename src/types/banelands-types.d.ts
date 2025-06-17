@@ -98,7 +98,7 @@ export interface JourneyProgress {
     quarterDay: QuarterDay;
     activity: ActivityId;
     actor?: string; // Actor ID
-    result?: any;
+    result?: unknown;
   }[];
 }
 

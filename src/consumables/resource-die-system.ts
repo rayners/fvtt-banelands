@@ -45,7 +45,7 @@ export class ResourceDieSystem {
       return null; // Fully depleted
     }
 
-    return sequence[currentIndex + 1]!;
+    return sequence[currentIndex + 1] as ResourceDieType;
   }
 
   /**
@@ -61,7 +61,7 @@ export class ResourceDieSystem {
       return 'd12'; // Maximum
     }
 
-    return sequence[currentIndex + 1]!;
+    return sequence[currentIndex + 1] as ResourceDieType;
   }
 
   /**

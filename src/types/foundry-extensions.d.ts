@@ -22,9 +22,9 @@ declare global {
     id: string;
     name: string;
     type: string;
-    getFlag(scope: string, key: string): any;
-    setFlag(scope: string, key: string, value: any): Promise<void>;
-    system: any;
+    getFlag(scope: string, key: string): unknown;
+    setFlag(scope: string, key: string, value: unknown): Promise<void>;
+    system: Record<string, unknown>;
   }
 
   // Missing Foundry globals
@@ -34,7 +34,13 @@ declare global {
   }
 
   interface ChatMessage {
-    static create(data: any): Promise<ChatMessage>;
+    id: string;
+    content: string;
+  }
+
+  interface ChatMessageConstructor {
+    create(data: Record<string, unknown>): Promise<ChatMessage>;
+    new(): ChatMessage;
   }
 
   // Constants interface
@@ -54,7 +60,7 @@ declare global {
   const Roll: {
     new (formula: string): Roll;
   };
-  const ChatMessage: typeof ChatMessage;
+  const ChatMessage: ChatMessageConstructor;
   const CONST: CONST;
   const CONFIG: CONFIG;
   const Hooks: HooksManager;
@@ -63,13 +69,13 @@ declare global {
 
   interface Window {
     BaneLands?: typeof game.banelands;
-    $: any;
-    jQuery: any;
+    $: unknown;
+    jQuery: unknown;
   }
 
   // Global test environment variables  
-  const $: any;
-  const jQuery: any;
+  const $: unknown;
+  const jQuery: unknown;
   
   // Make global variables available to tests
   var game: Game;
@@ -79,18 +85,18 @@ declare global {
 
   // Extend global object for test environment
   interface Global {
-    $: any;
-    jQuery: any;
+    $: unknown;
+    jQuery: unknown;
     game: Game;
     ui: UI;
     Hooks: HooksManager;
     CONFIG: CONFIG;
-    Actor: any;
-    Item: any;
-    JournalEntry: any;
-    Dialog: any;
-    Application: any;
-    foundry: any;
+    Actor: unknown;
+    Item: unknown;
+    JournalEntry: unknown;
+    Dialog: unknown;
+    Application: unknown;
+    foundry: unknown;
   }
 
   // For Node.js compatibility  
@@ -105,7 +111,7 @@ interface BaneLandsAPI {
 
   // Journey System
   moveToHex(fromHex: string, toHex: string): Promise<{ success: boolean; mishap?: string }>;
-  performQuarterDayActivity(activity: string, actor: Actor): Promise<any>;
+  performQuarterDayActivity(activity: string, actor: Actor): Promise<unknown>;
   calculateTravelTime(fromHex: string, toHex: string, terrain: string): number;
 
   // Consumables
