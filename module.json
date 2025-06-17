@@ -29,7 +29,7 @@
     "systems": [
       {
         "id": "dragonbane",
-        "type": "recommended",
+        "type": "optional",
         "compatibility": {}
       }
     ],
