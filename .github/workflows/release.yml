@@ -34,7 +34,7 @@ jobs:
         run: npm run typecheck
 
       - name: Create release package
-        uses: rayners/foundry-module-actions/release@v6.0.0
+        uses: rayners/foundry-module-actions/release@v4
         with:
           node-version: '20'
           build-command: 'npm run build'
