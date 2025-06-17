@@ -4,7 +4,6 @@ about: Suggest an idea for this project
 title: '[FEATURE] '
 labels: enhancement
 assignees: ''
-
 ---
 
 **Is your feature request related to a problem? Please describe.**
@@ -20,16 +19,18 @@ A clear and concise description of any alternative solutions or features you've 
 Add any other context or screenshots about the feature request here.
 
 **Feature Category (check one)**
+
 - [ ] Resource Die System
-- [ ] Journey/Travel Mechanics  
+- [ ] Journey/Travel Mechanics
 - [ ] Character Sheet Integration
 - [ ] Dragonbane System Integration
 - [ ] API/Module Integration
 - [ ] User Interface
 - [ ] Configuration/Settings
-- [ ] Other: ___________
+- [ ] Other: \***\*\_\_\_\*\***
 
 **Priority (your opinion)**
+
 - [ ] Critical - Blocking current workflow
 - [ ] High - Would significantly improve experience
 - [ ] Medium - Nice to have improvement

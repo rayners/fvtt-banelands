@@ -86,7 +86,11 @@ class BaneLands {
         return await this.resourceDice.rollResourceDie(dieType);
       },
 
-      setResourceDie: async (actor: Actor, consumableType: string, dieType: string): Promise<void> => {
+      setResourceDie: async (
+        actor: Actor,
+        consumableType: string,
+        dieType: string
+      ): Promise<void> => {
         if (!this.resourceDice.isValidDieType(dieType)) {
           throw new Error(`Invalid die type: ${dieType}`);
         }
@@ -111,7 +115,11 @@ class BaneLands {
         return await this.consumables.useConsumable(actor, consumableType as any);
       },
 
-      restoreConsumable: async (actor: Actor, consumableType: string, amount: number): Promise<void> => {
+      restoreConsumable: async (
+        actor: Actor,
+        consumableType: string,
+        amount: number
+      ): Promise<void> => {
         if (!['food', 'water', 'arrows', 'torches'].includes(consumableType)) {
           throw new Error(`Invalid consumable type: ${consumableType}`);
         }
@@ -119,11 +127,17 @@ class BaneLands {
       },
 
       // Journey System (placeholder for future implementation)
-      moveToHex: async (_fromHex: string, _toHex: string): Promise<{ success: boolean; error?: string }> => {
+      moveToHex: async (
+        _fromHex: string,
+        _toHex: string
+      ): Promise<{ success: boolean; error?: string }> => {
         return { success: false, error: 'Journey system not yet implemented' };
       },
 
-      performQuarterDayActivity: async (_activity: string, _actor: Actor): Promise<{ success: boolean; error?: string }> => {
+      performQuarterDayActivity: async (
+        _activity: string,
+        _actor: Actor
+      ): Promise<{ success: boolean; error?: string }> => {
         return { success: false, error: 'Activity system not yet implemented' };
       },
 

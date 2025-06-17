@@ -2,11 +2,11 @@
   "BANELANDS": {
     "ModuleTitle": "BaneLands",
     "ModuleDescription": "Forbidden Lands mechanics for Dragonbane",
-    
+
     "Consumables": {
       "ResourceDice": "Resource Dice",
       "Food": "Food",
-      "Water": "Water", 
+      "Water": "Water",
       "Arrows": "Arrows",
       "Torches": "Torches",
       "Empty": "Empty",
@@ -20,11 +20,11 @@
       "ResourceCompletelyDepleted": "{actor}'s {resource} is completely depleted!",
       "ResourceRestored": "{actor} restored {units} unit(s) of {resource} (now {die})"
     },
-    
+
     "Journey": {
       "Title": "Journey",
       "Travel": "Travel",
-      "Navigate": "Navigate", 
+      "Navigate": "Navigate",
       "KeepWatch": "Keep Watch",
       "Forage": "Forage",
       "Hunt": "Hunt",
@@ -39,24 +39,24 @@
       "Evening": "Evening",
       "Night": "Night"
     },
-    
+
     "Terrain": {
       "OpenTerrain": "Open Terrain",
       "DifficultTerrain": "Difficult Terrain",
       "Forest": "Forest",
-      "Hills": "Hills", 
+      "Hills": "Hills",
       "Mountains": "Mountains",
       "Water": "Water",
       "Swampland": "Swampland",
       "Ruins": "Ruins"
     },
-    
+
     "Settings": {
       "AutoInitializeConsumables": "Auto-Initialize Consumables",
       "AutoInitializeConsumablesHint": "Automatically set up resource dice for new characters",
       "DefaultFoodDie": "Default Food Resource Die",
       "DefaultFoodDieHint": "Starting resource die for food",
-      "DefaultWaterDie": "Default Water Resource Die", 
+      "DefaultWaterDie": "Default Water Resource Die",
       "DefaultWaterDieHint": "Starting resource die for water",
       "DefaultArrowsDie": "Default Arrows Resource Die",
       "DefaultArrowsDieHint": "Starting resource die for arrows",
@@ -71,7 +71,7 @@
       "DebugMode": "Debug Mode",
       "DebugModeHint": "Enable debug logging for troubleshooting"
     },
-    
+
     "Errors": {
       "InvalidDieType": "Invalid die type: {type}",
       "InvalidConsumableType": "Invalid consumable type: {type}",
