@@ -112,6 +112,7 @@ export interface ActorConsumables {
   water: ResourceDieState;
   arrows: ResourceDieState;
   torches: ResourceDieState;
+  [key: string]: ResourceDieState; // Allow string indexing for iteration
 }
 
 export interface TravelRoll {

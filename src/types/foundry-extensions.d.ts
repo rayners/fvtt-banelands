@@ -1,18 +1,100 @@
 // Global type extensions for BaneLands module
 
+/// <reference types="@rayners/foundry-dev-tools/types/foundry-v13-essentials" />
+
 declare global {
+  // Extend Game interface for BaneLands
   interface Game {
+    actors?: Collection<Actor>;
+    user?: FoundryUser;
+    settings: ClientSettings;
+    system: System;
     banelands?: {
       consumables: import('../consumables/consumable-manager').ConsumableManager;
-      journeys: import('../journeys/hex-map-manager').HexMapManager;
+      journeys: null; // Will be implemented later
       resourceDice: import('../consumables/resource-die-system').ResourceDieSystem;
       api: BaneLandsAPI;
     };
   }
 
+  // Actor type for Foundry VTT  
+  interface Actor {
+    id: string;
+    name: string;
+    type: string;
+    getFlag(scope: string, key: string): any;
+    setFlag(scope: string, key: string, value: any): Promise<void>;
+    system: any;
+  }
+
+  // Missing Foundry globals
+  interface Roll {
+    evaluate(): Promise<this>;
+    total: number | null;
+  }
+
+  interface ChatMessage {
+    static create(data: any): Promise<ChatMessage>;
+  }
+
+  // Constants interface
+  interface CONST {
+    CHAT_MESSAGE_TYPES: {
+      ROLL: number;
+    };
+  }
+
+  interface CONFIG {
+    sounds: {
+      dice: string;
+    };
+  }
+
+  // Global constructors and variables
+  const Roll: {
+    new (formula: string): Roll;
+  };
+  const ChatMessage: typeof ChatMessage;
+  const CONST: CONST;
+  const CONFIG: CONFIG;
+  const Hooks: HooksManager;
+  const game: Game;
+  const ui: UI;
+
   interface Window {
     BaneLands?: typeof game.banelands;
+    $: any;
+    jQuery: any;
   }
+
+  // Global test environment variables  
+  const $: any;
+  const jQuery: any;
+  
+  // Make global variables available to tests
+  var game: Game;
+  var ui: UI;
+  var Hooks: HooksManager;
+  var CONFIG: CONFIG;
+
+  // Extend global object for test environment
+  interface Global {
+    $: any;
+    jQuery: any;
+    game: Game;
+    ui: UI;
+    Hooks: HooksManager;
+    CONFIG: CONFIG;
+    Actor: any;
+    Item: any;
+    JournalEntry: any;
+    Dialog: any;
+    Application: any;
+    foundry: any;
+  }
+
+  // For Node.js compatibility  
+  var global: Global;
 }
 
 interface BaneLandsAPI {
