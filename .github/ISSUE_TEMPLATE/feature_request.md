@@ -1,0 +1,39 @@
+---
+name: Feature request
+about: Suggest an idea for this project
+title: '[FEATURE] '
+labels: enhancement
+assignees: ''
+
+---
+
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
+
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Additional context**
+Add any other context or screenshots about the feature request here.
+
+**Feature Category (check one)**
+- [ ] Resource Die System
+- [ ] Journey/Travel Mechanics  
+- [ ] Character Sheet Integration
+- [ ] Dragonbane System Integration
+- [ ] API/Module Integration
+- [ ] User Interface
+- [ ] Configuration/Settings
+- [ ] Other: ___________
+
+**Priority (your opinion)**
+- [ ] Critical - Blocking current workflow
+- [ ] High - Would significantly improve experience
+- [ ] Medium - Nice to have improvement
+- [ ] Low - Minor enhancement
+
+**Implementation Notes**
+If you have ideas about how this could be implemented, please share them here.

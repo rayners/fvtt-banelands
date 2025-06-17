@@ -1,0 +1,82 @@
+{
+  "BANELANDS": {
+    "ModuleTitle": "BaneLands",
+    "ModuleDescription": "Forbidden Lands mechanics for Dragonbane",
+    
+    "Consumables": {
+      "ResourceDice": "Resource Dice",
+      "Food": "Food",
+      "Water": "Water", 
+      "Arrows": "Arrows",
+      "Torches": "Torches",
+      "Empty": "Empty",
+      "Depleted": "Depleted",
+      "Use": "Use",
+      "Restore": "Restore",
+      "UsageRoll": "Usage Roll",
+      "ResourceDepleted": "Resource Depleted!",
+      "NoResourceRemaining": "No {resource} remaining!",
+      "ResourceReduced": "{actor}'s {resource} reduced to {die}",
+      "ResourceCompletelyDepleted": "{actor}'s {resource} is completely depleted!",
+      "ResourceRestored": "{actor} restored {units} unit(s) of {resource} (now {die})"
+    },
+    
+    "Journey": {
+      "Title": "Journey",
+      "Travel": "Travel",
+      "Navigate": "Navigate", 
+      "KeepWatch": "Keep Watch",
+      "Forage": "Forage",
+      "Hunt": "Hunt",
+      "Fish": "Fish",
+      "MakeCamp": "Make Camp",
+      "Rest": "Rest",
+      "Sleep": "Sleep",
+      "Explore": "Explore",
+      "QuarterDay": "Quarter Day",
+      "Morning": "Morning",
+      "Day": "Day",
+      "Evening": "Evening",
+      "Night": "Night"
+    },
+    
+    "Terrain": {
+      "OpenTerrain": "Open Terrain",
+      "DifficultTerrain": "Difficult Terrain",
+      "Forest": "Forest",
+      "Hills": "Hills", 
+      "Mountains": "Mountains",
+      "Water": "Water",
+      "Swampland": "Swampland",
+      "Ruins": "Ruins"
+    },
+    
+    "Settings": {
+      "AutoInitializeConsumables": "Auto-Initialize Consumables",
+      "AutoInitializeConsumablesHint": "Automatically set up resource dice for new characters",
+      "DefaultFoodDie": "Default Food Resource Die",
+      "DefaultFoodDieHint": "Starting resource die for food",
+      "DefaultWaterDie": "Default Water Resource Die", 
+      "DefaultWaterDieHint": "Starting resource die for water",
+      "DefaultArrowsDie": "Default Arrows Resource Die",
+      "DefaultArrowsDieHint": "Starting resource die for arrows",
+      "DefaultTorchesDie": "Default Torches Resource Die",
+      "DefaultTorchesDieHint": "Starting resource die for torches",
+      "EnableJourneySystem": "Enable Journey System",
+      "EnableJourneySystemHint": "Enable hex-based travel and exploration mechanics",
+      "HexSize": "Hex Size (km)",
+      "HexSizeHint": "Size of each hex in kilometers for travel calculations",
+      "IntegrateWithJourneys": "Integrate with Journeys & Jamborees",
+      "IntegrateWithJourneysHint": "Enable integration with the Journeys & Jamborees module if available",
+      "DebugMode": "Debug Mode",
+      "DebugModeHint": "Enable debug logging for troubleshooting"
+    },
+    
+    "Errors": {
+      "InvalidDieType": "Invalid die type: {type}",
+      "InvalidConsumableType": "Invalid consumable type: {type}",
+      "NotImplemented": "Feature not yet implemented",
+      "RequiresGM": "This action requires GM permissions"
+    }
+  }
+}

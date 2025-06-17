@@ -1,0 +1,230 @@
+// BaneLands module styles
+
+.banelands-consumables {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 4px;
+  background: var(--color-bg-option);
+
+  h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--color-text-dark-primary);
+    border-bottom: 1px solid var(--color-border-light-tertiary);
+    padding-bottom: 5px;
+  }
+
+  .consumables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+  }
+
+  .consumable-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid var(--color-border-light-secondary);
+    border-radius: 3px;
+    background: var(--color-bg-btn);
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: var(--color-bg-btn-hover);
+    }
+
+    &.depleted {
+      opacity: 0.6;
+      background: var(--color-bg-btn-disabled);
+    }
+
+    label {
+      font-size: 0.9em;
+      font-weight: bold;
+      margin-bottom: 4px;
+      color: var(--color-text-dark-primary);
+    }
+
+    .resource-die {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+
+      .die-type {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: var(--color-text-light-heading);
+        padding: 2px 6px;
+        border-radius: 2px;
+        background: var(--color-primary);
+        min-width: 24px;
+        text-align: center;
+
+        &.empty {
+          background: var(--color-bg-btn-disabled);
+          color: var(--color-text-dark-inactive);
+        }
+      }
+
+      .use-consumable {
+        background: var(--color-secondary);
+        color: var(--color-text-light-primary);
+        border: none;
+        border-radius: 2px;
+        padding: 2px 8px;
+        font-size: 0.8em;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover:not(:disabled) {
+          background: var(--color-secondary-dark);
+        }
+
+        &:disabled {
+          background: var(--color-bg-btn-disabled);
+          color: var(--color-text-dark-inactive);
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+.banelands-resource-roll {
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 4px;
+  padding: 10px;
+  background: var(--color-bg-option);
+
+  h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1em;
+    color: var(--color-text-dark-primary);
+  }
+
+  .roll-result {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+
+    .die {
+      font-weight: bold;
+      color: var(--color-primary);
+      background: var(--color-bg-btn);
+      padding: 4px 8px;
+      border-radius: 3px;
+      border: 1px solid var(--color-border-light-secondary);
+    }
+
+    .result {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: var(--color-text-dark-primary);
+    }
+  }
+
+  .depletion-warning {
+    color: var(--color-text-light-primary);
+    background: var(--color-level-warning);
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+// Journey system styles (for future implementation)
+.banelands-journey {
+  .hex-map {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-border-light-tertiary);
+    border-radius: 4px;
+    background: var(--color-bg-option);
+  }
+
+  .hex {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &.discovered {
+      opacity: 1;
+    }
+
+    &.undiscovered {
+      opacity: 0.3;
+    }
+
+    &.current {
+      border: 2px solid var(--color-primary);
+    }
+  }
+
+  .quarter-day-tracker {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+
+    .quarter {
+      flex: 1;
+      padding: 8px;
+      text-align: center;
+      border: 1px solid var(--color-border-light-secondary);
+      border-radius: 3px;
+      background: var(--color-bg-btn);
+
+      &.current {
+        background: var(--color-primary);
+        color: var(--color-text-light-primary);
+      }
+
+      &.completed {
+        background: var(--color-bg-btn-disabled);
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .activity-selector {
+    margin: 10px 0;
+
+    .activity-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 8px;
+    }
+
+    .activity-button {
+      padding: 8px;
+      border: 1px solid var(--color-border-light-secondary);
+      border-radius: 3px;
+      background: var(--color-bg-btn);
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background: var(--color-bg-btn-hover);
+      }
+
+      &.selected {
+        background: var(--color-primary);
+        color: var(--color-text-light-primary);
+      }
+
+      &.disabled {
+        background: var(--color-bg-btn-disabled);
+        color: var(--color-text-dark-inactive);
+        cursor: not-allowed;
+      }
+    }
+  }
+}

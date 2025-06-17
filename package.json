@@ -1,0 +1,42 @@
+{
+  "name": "banelands",
+  "version": "0.1.0",
+  "description": "Forbidden Lands mechanics for Dragonbane in Foundry VTT",
+  "type": "module",
+  "main": "dist/module.js",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c -w",
+    "dev": "SERVE=true rollup -c -w",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "lint": "eslint src --ext .ts,.js",
+    "lint:fix": "eslint src --ext .ts,.js --fix",
+    "format": "prettier --write \"src/**/*.{ts,js,json}\" \"test/**/*.{ts,js}\" \"*.{js,json,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,js,json}\" \"test/**/*.{ts,js}\" \"*.{js,json,md}\"",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:watch": "vitest --watch",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "validate": "npm run lint && npm run format:check && npm run typecheck && npm run test:run && npm run build",
+    "link-module": "node ../foundry-dev-tools/scripts/link-module.js",
+    "prepare": "npm run build"
+  },
+  "author": "David Raynes",
+  "license": "MIT",
+  "devDependencies": {
+    "@ethaks/fvtt-quench": "^0.10.0",
+    "@rayners/foundry-dev-tools": "^1.2.0",
+    "@types/jquery": "^3.5.30",
+    "eslint": "^9.28.0",
+    "jsdom": "^26.1.0",
+    "prettier": "^3.5.3",
+    "rollup": "^4.42.0",
+    "sass": "^1.62.0",
+    "tslib": "^2.5.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.3"
+  }
+}

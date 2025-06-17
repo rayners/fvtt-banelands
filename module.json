@@ -1,0 +1,61 @@
+{
+  "id": "banelands",
+  "title": "BaneLands",
+  "description": "Implements Forbidden Lands journey and resource mechanics for the Dragonbane system in Foundry VTT. Features hex-based travel, resource die consumables, quarter-day activity system, and comprehensive mishap tables.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "David Raynes",
+      "email": "rayners@gmail.com",
+      "discord": "rayners78",
+      "github": "rayners"
+    }
+  ],
+  "esmodules": ["module.js"],
+  "styles": ["styles/banelands.css"],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "dragonbane",
+        "type": "recommended",
+        "compatibility": {}
+      }
+    ],
+    "modules": [
+      {
+        "id": "journeys-and-jamborees",
+        "type": "optional",
+        "compatibility": {}
+      }
+    ]
+  },
+  "socket": false,
+  "url": "https://github.com/rayners/fvtt-banelands",
+  "manifest": "https://github.com/rayners/fvtt-banelands/releases/latest/download/module.json",
+  "download": "https://github.com/rayners/fvtt-banelands/releases/latest/download/module.zip",
+  "documentation": "https://docs.rayners.dev/banelands",
+  "bugs": "https://github.com/rayners/fvtt-banelands/issues",
+  "changelog": "https://github.com/rayners/fvtt-banelands/blob/main/CHANGELOG.md",
+  "funding": [
+    {
+      "type": "patreon",
+      "url": "https://patreon.com/rayners"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/rayners"
+    }
+  ]
+}

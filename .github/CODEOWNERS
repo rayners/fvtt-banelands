@@ -1,0 +1,13 @@
+# Global ownership
+* @rayners
+
+# Build and CI
+package.json @rayners
+package-lock.json @rayners
+.github/ @rayners
+rollup.config.js @rayners
+tsconfig.json @rayners
+vitest.config.ts @rayners
+
+# Module configuration
+module.json @rayners
