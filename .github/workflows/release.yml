@@ -33,9 +33,6 @@ jobs:
       - name: Run type checking
         run: npm run typecheck
 
-      - name: Build module
-        run: npm run build
-
       - name: Create release package
         uses: rayners/foundry-module-actions/release@v6.0.0
         with:
