@@ -1,96 +1,92 @@
-// BaneLands module styles
+// BaneLands module styles - Resource dice styling for derived-stat integration
 
-.banelands-consumables {
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid var(--color-border-light-tertiary);
-  border-radius: 4px;
-  background: var(--color-bg-option);
-
-  h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.1em;
-    font-weight: bold;
+// Resource dice select control within derived-stat table
+.resource-die-select {
+  width: 100%;
+  text-align: center;
+  text-align-last: center; // Dragonbane pattern
+  font-size: 1em;
+  font-weight: bold;
+  background: transparent;
+  border: 1px solid transparent; // Dragonbane pattern
+  border-radius: 2px;
+  color: var(--color-text-dark-primary);
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: all 0.2s ease;
+  
+  // Add subtle visual cues for interactivity
+  &:hover {
+    border-color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  &:focus {
+    outline: 1px solid var(--color-primary);
+    outline-offset: 1px;
+    border-color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  &:disabled {
+    color: var(--color-text-dark-inactive);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  option {
+    background: var(--color-bg-option);
     color: var(--color-text-dark-primary);
-    border-bottom: 1px solid var(--color-border-light-tertiary);
-    padding-bottom: 5px;
+    text-align: center;
+    text-align-last: center; // Dragonbane pattern
+    padding: 4px 8px;
+    
+    // Style for depleted option
+    &[value=""] {
+      font-style: italic;
+      color: var(--color-text-dark-inactive);
+    }
+    
+    // Unicode symbols are included directly in the HTML
   }
+}
 
-  .consumables-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 8px;
+// Depleted row styling for derived-stat table
+.derived-stat tr.depleted {
+  opacity: 0.6;
+  
+  th {
+    color: var(--color-text-dark-inactive) !important;
   }
+}
 
-  .consumable-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 8px;
-    border: 1px solid var(--color-border-light-secondary);
-    border-radius: 3px;
-    background: var(--color-bg-btn);
-    transition: background-color 0.2s ease;
+// Clickable resource die labels
+.derived-stat th.roll-resource-die {
+  cursor: pointer;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: var(--color-primary) !important;
+    text-decoration: underline;
+  }
+  
+  &:active {
+    color: var(--color-primary-dark) !important;
+  }
+}
 
-    &:hover {
-      background: var(--color-bg-btn-hover);
-    }
-
-    &.depleted {
-      opacity: 0.6;
-      background: var(--color-bg-btn-disabled);
-    }
-
-    label {
-      font-size: 0.9em;
-      font-weight: bold;
-      margin-bottom: 4px;
-      color: var(--color-text-dark-primary);
-    }
-
-    .resource-die {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-
-      .die-type {
-        font-size: 1.1em;
-        font-weight: bold;
-        color: var(--color-text-light-heading);
-        padding: 2px 6px;
-        border-radius: 2px;
-        background: var(--color-primary);
-        min-width: 24px;
-        text-align: center;
-
-        &.empty {
-          background: var(--color-bg-btn-disabled);
-          color: var(--color-text-dark-inactive);
-        }
-      }
-
-      .use-consumable {
-        background: var(--color-secondary);
-        color: var(--color-text-light-primary);
-        border: none;
-        border-radius: 2px;
-        padding: 2px 8px;
-        font-size: 0.8em;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-
-        &:hover:not(:disabled) {
-          background: var(--color-secondary-dark);
-        }
-
-        &:disabled {
-          background: var(--color-bg-btn-disabled);
-          color: var(--color-text-dark-inactive);
-          cursor: not-allowed;
-        }
-      }
-    }
+// Disable clicking for depleted resources
+.derived-stat tr.depleted th.roll-resource-die {
+  cursor: not-allowed;
+  
+  &:hover {
+    color: var(--color-text-dark-inactive) !important;
+    text-decoration: none;
+  }
+  
+  &:active {
+    color: var(--color-text-dark-inactive) !important;
   }
 }
 
