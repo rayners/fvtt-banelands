@@ -34,19 +34,12 @@ jobs:
         run: npm run build
 
       - name: Create release package
-        uses: rayners/foundry-module-actions/release@v1
+        uses: rayners/foundry-module-actions/release@v6.0.0
         with:
-          module-id: "banelands"
-          include-files: |
-            module.js
-            module.json
-            styles/banelands.css
-            languages/en.json
-            templates/*.hbs
-            LICENSE
-            README.md
-            README_FOUNDRY.md
-            CHANGELOG.md
+          node-version: '20'
+          build-command: 'npm run build'
+          working-directory: 'dist'
+          module-files: 'module.js module.json styles/ languages/ README.md README_FOUNDRY.md CHANGELOG.md LICENSE'
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
