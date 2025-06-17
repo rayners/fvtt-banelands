@@ -1,6 +1,9 @@
 // BaneLands - Forbidden Lands mechanics for Dragonbane
 // Main module entry point
 
+// Import styles
+import '../styles/banelands.scss';
+
 import { ConsumableManager } from './consumables/consumable-manager';
 import { ResourceDieSystem } from './consumables/resource-die-system';
 import { registerSettings } from './settings';
