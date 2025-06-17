@@ -25,7 +25,7 @@ export function registerHooks(): void {
   });
 
   // Render actor sheet hook - add consumable controls
-  Hooks.on('renderActorSheet', (app: { actor: Actor }, html: HTMLElement) => {
+  Hooks.on('renderActorSheet', (app: { actor: Actor; render(): void }, html: HTMLElement) => {
     if (app.actor.type !== 'character') return;
 
     // Add consumable display to character sheets
@@ -35,7 +35,8 @@ export function registerHooks(): void {
   // Pre-update actor hook - handle consumable changes
   Hooks.on('preUpdateActor', (actor: Actor, updateData: Record<string, unknown>) => {
     // Future: Add validation or automatic updates for consumable changes
-    if (updateData.flags?.banelands?.consumables) {
+    const flags = updateData.flags as Record<string, unknown> | undefined;
+    if (flags?.banelands) {
       // Consumables updated for actor
     }
   });
@@ -44,7 +45,7 @@ export function registerHooks(): void {
 /**
  * Add consumable display to actor sheets
  */
-function addConsumableDisplay(app: { actor: Actor }, html: HTMLElement): void {
+function addConsumableDisplay(app: { actor: Actor; render(): void }, html: HTMLElement): void {
   const actor = app.actor;
   const consumableManager = game.banelands?.consumables;
 
