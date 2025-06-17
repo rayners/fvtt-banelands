@@ -25,12 +25,15 @@ export function registerHooks(): void {
   });
 
   // Render actor sheet hook - add consumable controls
-  Hooks.on('renderActorSheet', (app: { actor: Actor; render(): void }, html: JQuery<HTMLElement>) => {
-    if (app.actor.type !== 'character') return;
+  Hooks.on(
+    'renderActorSheet',
+    (app: { actor: Actor; render(): void }, html: JQuery<HTMLElement>) => {
+      if (app.actor.type !== 'character') return;
 
-    // Add consumable display to character sheets
-    addConsumableDisplay(app, html);
-  });
+      // Add consumable display to character sheets
+      addConsumableDisplay(app, html);
+    }
+  );
 
   // Pre-update actor hook - handle consumable changes
   Hooks.on('preUpdateActor', (actor: Actor, updateData: Record<string, unknown>) => {
@@ -45,7 +48,10 @@ export function registerHooks(): void {
 /**
  * Add consumable display to actor sheets
  */
-function addConsumableDisplay(app: { actor: Actor; render(): void }, html: JQuery<HTMLElement>): void {
+function addConsumableDisplay(
+  app: { actor: Actor; render(): void },
+  html: JQuery<HTMLElement>
+): void {
   const actor = app.actor;
   const consumableManager = game.banelands?.consumables;
 
@@ -63,17 +69,18 @@ function addConsumableDisplay(app: { actor: Actor; render(): void }, html: JQuer
       const currencySection = html.find('.currency, .money, [data-group="currency"]').last()[0];
       insertTarget = currencySection || inventoryTab;
     }
-    
+
     // Fallback to main tab if inventory not found
     if (!insertTarget) {
-      insertTarget = html.find('.sheet-body .tab[data-tab="main"]')[0] || html.find('.sheet-body')[0] || null;
+      insertTarget =
+        html.find('.sheet-body .tab[data-tab="main"]')[0] || html.find('.sheet-body')[0] || null;
     }
   } else {
     // Generic fallback - try inventory first, then main
-    insertTarget = 
-      html.find('.tab[data-tab="inventory"]')[0] || 
-      html.find('.sheet-body')[0] || 
-      html.find('.window-content')[0] || 
+    insertTarget =
+      html.find('.tab[data-tab="inventory"]')[0] ||
+      html.find('.sheet-body')[0] ||
+      html.find('.window-content')[0] ||
       null;
   }
 
@@ -109,10 +116,11 @@ function addConsumableDisplay(app: { actor: Actor; render(): void }, html: JQuer
   `;
 
   // Insert the HTML - after currency section if found, otherwise at end of container
-  const isCurrencySection = insertTarget.classList?.contains('currency') || 
-                           insertTarget.classList?.contains('money') || 
-                           insertTarget.hasAttribute?.('data-group');
-  
+  const isCurrencySection =
+    insertTarget.classList?.contains('currency') ||
+    insertTarget.classList?.contains('money') ||
+    insertTarget.hasAttribute?.('data-group');
+
   if (isCurrencySection) {
     insertTarget.insertAdjacentHTML('afterend', consumablesHtml);
   } else {
@@ -124,12 +132,12 @@ function addConsumableDisplay(app: { actor: Actor; render(): void }, html: JQuer
     event.preventDefault();
     const $target = $(event.currentTarget);
     const consumableType = $target.data('consumable');
-    
+
     // Don't roll if the resource is depleted
     if ($target.closest('tr').hasClass('depleted')) {
       return;
     }
-    
+
     if (consumableType && consumableManager) {
       await consumableManager.useConsumable(actor, consumableType as ConsumableId);
       app.render(); // Re-render the sheet to update display
@@ -141,7 +149,7 @@ function addConsumableDisplay(app: { actor: Actor; render(): void }, html: JQuer
     const $target = $(event.currentTarget);
     const consumableType = $target.data('consumable');
     const newDieType = $target.val() as string;
-    
+
     if (consumableType && consumableManager) {
       if (newDieType === '' || newDieType === '—') {
         // Set as depleted
@@ -150,7 +158,11 @@ function addConsumableDisplay(app: { actor: Actor; render(): void }, html: JQuer
         await consumableManager.setActorConsumables(actor, consumables);
       } else {
         // Set the new die type
-        await consumableManager.setResourceDie(actor, consumableType as ConsumableId, newDieType as any);
+        await consumableManager.setResourceDie(
+          actor,
+          consumableType as ConsumableId,
+          newDieType as any
+        );
       }
       app.render(); // Re-render the sheet to update display
     }
