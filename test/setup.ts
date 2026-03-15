@@ -1,7 +1,7 @@
 // Import types for test environment
 
 // Mock Foundry globals
-global.game = {
+(globalThis as any).game = {
   user: {
     id: 'test-user',
     isGM: true,
@@ -33,58 +33,58 @@ global.game = {
   time: {
     worldTime: 0,
   },
-} as any;
+};
 
-global.ui = {
+(globalThis as any).ui = {
   notifications: {
     info: vi.fn(),
     warn: vi.fn(),
     error: vi.fn(),
   },
-} as any;
+};
 
-global.Hooks = {
+(globalThis as any).Hooks = {
   on: vi.fn(),
   once: vi.fn(),
   off: vi.fn(),
   call: vi.fn(),
   callAll: vi.fn(),
-} as any;
+};
 
-global.CONFIG = {
+(globalThis as any).CONFIG = {
   Combat: {},
   Actor: {},
   Item: {},
   JournalEntry: {},
-} as any;
+};
 
-global.Actor = class MockActor {
+(globalThis as any).Actor = class MockActor {
   static create = vi.fn();
   static updateDocuments = vi.fn();
   static deleteDocuments = vi.fn();
-} as any;
+};
 
-global.Item = class MockItem {
+(globalThis as any).Item = class MockItem {
   static create = vi.fn();
-} as any;
+};
 
-global.JournalEntry = class MockJournalEntry {
+(globalThis as any).JournalEntry = class MockJournalEntry {
   static create = vi.fn();
-} as any;
+};
 
-global.Dialog = class MockDialog {
+(globalThis as any).Dialog = class MockDialog {
   static confirm = vi.fn();
   static prompt = vi.fn();
-} as any;
+};
 
-global.Application = class MockApplication {} as any;
+(globalThis as any).Application = class MockApplication {};
 
-global.foundry = {
+(globalThis as any).foundry = {
   utils: {
     randomID: () => 'test-id-' + Math.random().toString(36).substr(2, 9),
     isNewerVersion: vi.fn(() => false),
   },
-} as any;
+};
 
 // Mock window.location
 Object.defineProperty(window, 'location', {
