@@ -16,6 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced Dragonbane system integration
 - Journeys & Jamborees module integration
 
+## [0.1.1] - 2026-03-14
+
+### Changed
+
+- Release workflow now extracts version-specific notes from CHANGELOG.md
+- Release workflow notifies Foundry Package Registry after publishing
+- Cleaned up CHANGELOG.md to remove internal development notes
+
 ## [0.1.0] - 2026-03-14
 
 ### Changed
@@ -54,25 +62,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MIT license and contributor guidelines
 - GitHub issue templates for bug reports and feature requests
 - Complete npm script pipeline for development and CI/CD
-
----
-
-## Development Notes
-
-### Version 0.1.0 Goals
-
-- ✅ Resource die system implementation
-- ✅ Character sheet integration
-- ✅ Module configuration system
-- ✅ TypeScript and build infrastructure
-- ✅ Unit testing framework
-- ✅ Documentation and README files
-- 🚧 GitHub Actions for automated releases
-- 📋 Public release and module registry submission
-
-### Future Versions
-
-- **0.2.0**: Journey system with hex-based travel
-- **0.3.0**: Activity system and quarter-day mechanics
-- **0.4.0**: Mishap tables and encounter system
-- **1.0.0**: Complete feature set with comprehensive testing
