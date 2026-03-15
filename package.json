@@ -1,6 +1,6 @@
 {
   "name": "banelands",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Forbidden Lands mechanics for Dragonbane in Foundry VTT",
   "type": "module",
   "main": "dist/module.js",

@@ -16,6 +16,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced Dragonbane system integration
 - Journeys & Jamborees module integration
 
+## [0.1.2] - 2026-03-14
+
+### Fixed
+
+- Release assets now contain version-specific manifest and download URLs
+- Removed redundant asset upload step that overwrote corrected URLs
+
+### Changed
+
+- Added release notes URL to Foundry Package Registry notification
+- Unpinned release action to @v6 floating tag
+
 ## [0.1.1] - 2026-03-14
 
 ### Changed
