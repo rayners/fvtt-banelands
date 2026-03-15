@@ -16,6 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced Dragonbane system integration
 - Journeys & Jamborees module integration
 
+## [0.1.0] - 2026-03-14
+
+### Changed
+
+- Migrated character sheet hooks to Dragonbane AppV2 (compatible with Dragonbane 3.x)
+- Updated CI to Node 22 and foundry-module-actions v6
+- Switched to public npm registry for dependencies
+
 ## [0.0.1] - 2025-01-17
 
 ### Added
