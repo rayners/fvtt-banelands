@@ -9,9 +9,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,5 +17,4 @@ jobs:
         uses: rayners/foundry-module-actions/ci@v6
         with:
           node-version: '22'
-          github-packages: true
           junit-output: true
