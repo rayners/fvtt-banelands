@@ -1,11 +1,13 @@
 # BaneLands
 
 ## Project Overview
+
 **BaneLands** is a Foundry VTT module that implements Forbidden Lands-inspired journey and resource mechanics for the Dragonbane system. The module focuses on generic survival and exploration mechanics without using copyrighted content.
 
 ## Key Constraints and Guidelines
 
 ### Legal Compliance
+
 - **No Copyrighted Content**: Use only publicly available mechanics concepts
 - **Generic Implementation**: Focus on common RPG survival mechanics (step-dice, hex travel, etc.)
 - **Inspiration Only**: Draw concepts from FL without copying specific text, tables, or artwork
@@ -14,6 +16,7 @@
 ## Development Commands
 
 ### Pre-Commit Requirement
+
 - **Always run `npm run validate` before committing** — runs lint, format, typecheck, tests, and build
 - CI failures from untested commits waste time; validate locally first
 
@@ -34,6 +37,7 @@ npm run validate      # Full pipeline: lint + format + typecheck + test + build
 ## Current Status: Phase 1 Complete
 
 Resource Die System is implemented:
+
 - Step-die mechanics (D12→D10→D8→D6→Empty, depletion on 1-2)
 - Four consumable types: food, water, arrows, torches
 - Actor integration with flag storage and character sheet hooks
@@ -45,6 +49,7 @@ and Advanced Features (mishap tables, J&J integration).
 ## Development Patterns
 
 ### Code Organization
+
 - **Modular Architecture**: Separate classes for each major system
 - **Type Safety**: Comprehensive TypeScript throughout
 - **Singleton Patterns**: Manager classes use getInstance() pattern
@@ -76,12 +81,14 @@ src/
 ## Key Technical Decisions
 
 ### Resource Die Implementation
+
 - **Step-Die Sequence**: D12→D10→D8→D6→Empty (industry standard)
 - **Depletion Rule**: 1-2 on die triggers step-down (common mechanic)
 - **Flag Storage**: `actor.flags.banelands.consumables` for persistence
 - **UI Integration**: Hook-based sheet enhancement rather than custom sheets
 
 ### Dragonbane AppV2 Integration
+
 - **Target**: Dragonbane 3.0.3+ (uses `HandlebarsApplicationMixin(ActorSheetV2)`)
 - **Hook**: `renderDoDCharacterSheet` (class-based AppV2 hook, NOT `renderActorSheet`)
 - **Hook signature**: `(app, element: HTMLElement, context, options)` — native DOM, no jQuery
@@ -90,6 +97,7 @@ src/
 - **Insertion point**: After first `.derived-stat-box` (currency section) in inventory tab
 
 ### module.json Relationships
+
 - `relationships.systems[].type` = package type (`"system"`), NOT dependency strength
 - `relationships.modules[].type` = package type (`"module"`), NOT `"optional"`/`"required"`
 - Foundry uses the array key (`systems`, `requires`) to express dependency nature
@@ -97,15 +105,18 @@ src/
 ## Known Considerations
 
 ### ESLint Configuration
+
 - Shared config from `@rayners/foundry-dev-tools` sets `parserOptions.project: true` which resolves `tsconfig.json` relative to `node_modules`
 - Local `eslint.config.js` must override with explicit `project: './tsconfig.json'` and `tsconfigRootDir: import.meta.dirname`
 
 ### Registry Configuration
+
 - `@rayners/foundry-dev-tools` is published to **public npm**, not GitHub Packages
 - `.npmrc` should NOT have `@rayners:registry=https://npm.pkg.github.com`
 - If registry changes are needed, regenerate `package-lock.json` (`rm package-lock.json && npm install`)
 
 ### Release Workflow
+
 - Release action (`rayners/foundry-module-actions/release@v6`) handles build, URL rewriting, zip, and asset upload
 - Do NOT add a separate asset upload step (e.g., `softprops/action-gh-release`) — it overwrites the version-specific URLs the release action sets via sed
 - Release notes are extracted from CHANGELOG.md by version and applied via `gh release edit`
@@ -113,16 +124,19 @@ src/
 - `FOUNDRY_RELEASE_TOKEN` repo secret is required (from foundryvtt.com package edit page, format `fvttp_...`)
 
 ### module.json URL Conventions (per Foundry docs)
+
 - `manifest` in module.json source: use `releases/latest/download/module.json` (Foundry polls this for updates)
 - `manifest` in Foundry Package Release API call: use version-specific URL (per API docs: "should point to a specific release")
 - The release action rewrites `latest` → version-specific in the built module.json before zipping
 
 ### Shared Actions (`rayners/foundry-module-actions`)
+
 - Source is at `~/Code/personal/foundry-module-actions`
 - `v6` is a floating tag — update it with `git tag -f v6 <commit> && git push origin v6 --force`
 - Banelands uses `@v6` (floating); S&S uses `@v6.0.1` (pinned)
 
 ### Legal Compliance
+
 - All mechanics are generic fantasy RPG concepts
 - No specific Forbidden Lands text or tables included
 - Terrain and activity names use common fantasy terminology

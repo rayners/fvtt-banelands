@@ -21,20 +21,21 @@ A Foundry VTT module that implements Forbidden Lands-inspired journey and resour
 ### Dragonbane Integration
 
 - **System Compatibility**: Designed specifically for the Dragonbane game system
-- **Skill Adaptation**: Maps Forbidden Lands mechanics to Dragonbane skills and abilities
 - **Character Sheet Integration**: Seamlessly adds resource tracking to existing character sheets
 
 ## Installation
 
-### Option 1: Manual Installation (Pre-Registry)
+### Foundry Module Browser
 
-1. Download the latest release from GitHub
-2. Extract to your Foundry `Data/modules` directory
-3. Enable the module in your world's Module Management
+Search for "BaneLands" in Foundry's Add-on Modules browser.
 
-### Option 2: Module Browser (Coming Soon)
+### Manifest URL
 
-BaneLands will be available through Foundry's module browser once it reaches stable release.
+Use this URL in Foundry's Install Module dialog:
+
+```
+https://github.com/rayners/fvtt-banelands/releases/latest/download/module.json
+```
 
 ## Quick Start
 
@@ -169,7 +170,6 @@ This module is designed for Foundry Virtual Tabletop and requires a valid Foundr
 ## Support
 
 - **Issues**: Report bugs and request features on [GitHub Issues](https://github.com/rayners/fvtt-banelands/issues)
-- **Documentation**: Full documentation available at [docs.rayners.dev/banelands](https://docs.rayners.dev/banelands)
 - **Discord**: Find help in the Foundry VTT community Discord
 
 ## Credits
