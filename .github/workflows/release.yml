@@ -34,36 +34,25 @@ jobs:
         run: npm run typecheck
 
       - name: Create release package
-        uses: rayners/foundry-module-actions/release@v6.0.0
+        uses: rayners/foundry-module-actions/release@v6
         with:
           node-version: '22'
           build-command: 'npm run build'
           working-directory: 'dist'
           module-files: 'module.js module.json styles/ languages/ README.md README_FOUNDRY.md CHANGELOG.md LICENSE'
 
-      - name: Extract release notes
-        id: release-notes
-        run: |
-          VERSION="${GITHUB_REF_NAME#v}"
-          # Extract the section for this version from CHANGELOG.md
-          # Matches from "## [VERSION]" until the next "## [" or "---" or end of file
-          awk "/^## \\[${VERSION}\\]/{found=1; next} /^## \\[|^---/{if(found) exit} found{print}" CHANGELOG.md > /tmp/release-notes.md
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            module.zip
-            module.json
-          body_path: /tmp/release-notes.md
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Extract version
         id: version
         run: echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Update release notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          # Extract the section for this version from CHANGELOG.md
+          awk "/^## \\[${VERSION}\\]/{found=1; next} /^## \\[|^---/{if(found) exit} found{print}" CHANGELOG.md > /tmp/release-notes.md
+          gh release edit "${{ github.event.release.tag_name }}" --notes-file /tmp/release-notes.md
 
       - name: Notify Foundry Package Registry
         uses: rayners/foundry-module-actions/foundry-release@v6
@@ -72,5 +61,6 @@ jobs:
           release-token: ${{ secrets.FOUNDRY_RELEASE_TOKEN }}
           version: ${{ steps.version.outputs.version }}
           manifest-url: 'https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/module.json'
+          notes-url: 'https://github.com/${{ github.repository }}/releases/tag/${{ github.event.release.tag_name }}'
           minimum-foundry-version: '13'
           verified-foundry-version: '13'
