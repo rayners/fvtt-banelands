@@ -105,6 +105,23 @@ src/
 - `.npmrc` should NOT have `@rayners:registry=https://npm.pkg.github.com`
 - If registry changes are needed, regenerate `package-lock.json` (`rm package-lock.json && npm install`)
 
+### Release Workflow
+- Release action (`rayners/foundry-module-actions/release@v6`) handles build, URL rewriting, zip, and asset upload
+- Do NOT add a separate asset upload step (e.g., `softprops/action-gh-release`) — it overwrites the version-specific URLs the release action sets via sed
+- Release notes are extracted from CHANGELOG.md by version and applied via `gh release edit`
+- Foundry Package Registry is notified via `rayners/foundry-module-actions/foundry-release@v6`
+- `FOUNDRY_RELEASE_TOKEN` repo secret is required (from foundryvtt.com package edit page, format `fvttp_...`)
+
+### module.json URL Conventions (per Foundry docs)
+- `manifest` in module.json source: use `releases/latest/download/module.json` (Foundry polls this for updates)
+- `manifest` in Foundry Package Release API call: use version-specific URL (per API docs: "should point to a specific release")
+- The release action rewrites `latest` → version-specific in the built module.json before zipping
+
+### Shared Actions (`rayners/foundry-module-actions`)
+- Source is at `~/Code/personal/foundry-module-actions`
+- `v6` is a floating tag — update it with `git tag -f v6 <commit> && git push origin v6 --force`
+- Banelands uses `@v6` (floating); S&S uses `@v6.0.1` (pinned)
+
 ### Legal Compliance
 - All mechanics are generic fantasy RPG concepts
 - No specific Forbidden Lands text or tables included
