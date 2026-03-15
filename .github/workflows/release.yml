@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
 
       - name: Install dependencies
@@ -37,7 +37,7 @@ jobs:
       - name: Create release package
         uses: rayners/foundry-module-actions/release@v6.0.0
         with:
-          node-version: '20'
+          node-version: '22'
           build-command: 'npm run build'
           working-directory: 'dist'
           module-files: 'module.js module.json styles/ languages/ README.md README_FOUNDRY.md CHANGELOG.md LICENSE'
