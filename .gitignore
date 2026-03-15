@@ -8,7 +8,6 @@ dist/
 test-dialog.html
 
 # Internal documentation (should be in ../local-docs/)
-CLAUDE.md
 *-IMPLEMENTATION.md
 PHASE*.md
 BETA-*.md
