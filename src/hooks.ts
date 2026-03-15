@@ -1,4 +1,4 @@
-// Foundry VTT hook registrations
+// Foundry VTT hook registrations for BaneLands module
 
 import type { ConsumableId } from './types/banelands-types';
 
@@ -11,33 +11,26 @@ export function registerHooks(): void {
       const consumableManager = game.banelands?.consumables;
       if (consumableManager) {
         await consumableManager.initializeActorConsumables(actor);
-        // Consumables initialized for new character
       }
     }
   });
 
-  // Pre-create actor hook - for Dragonbane integration
-  Hooks.on('preCreateActor', (_actor: Actor) => {
-    // Future: Add any pre-creation modifications needed for Dragonbane integration
-    if (game.system.id === 'dragonbane') {
-      // Pre-creation setup for Dragonbane character
-    }
-  });
-
-  // Render actor sheet hook - add consumable controls
+  // Render Dragonbane character sheet hook (AppV2) - add consumable controls
   Hooks.on(
-    'renderActorSheet',
-    (app: { actor: Actor; render(): void }, html: JQuery<HTMLElement>) => {
+    'renderDoDCharacterSheet',
+    (
+      app: { actor: Actor; render(): void },
+      element: HTMLElement,
+      _context: unknown,
+      _options: unknown
+    ) => {
       if (app.actor.type !== 'character') return;
-
-      // Add consumable display to character sheets
-      addConsumableDisplay(app, html);
+      addConsumableDisplay(app, element);
     }
   );
 
   // Pre-update actor hook - handle consumable changes
   Hooks.on('preUpdateActor', (actor: Actor, updateData: Record<string, unknown>) => {
-    // Future: Add validation or automatic updates for consumable changes
     const flags = updateData.flags as Record<string, unknown> | undefined;
     if (flags?.banelands) {
       // Consumables updated for actor
@@ -46,45 +39,21 @@ export function registerHooks(): void {
 }
 
 /**
- * Add consumable display to actor sheets
+ * Add consumable display to Dragonbane character sheets (AppV2 native DOM)
  */
-function addConsumableDisplay(
-  app: { actor: Actor; render(): void },
-  html: JQuery<HTMLElement>
-): void {
+function addConsumableDisplay(app: { actor: Actor; render(): void }, element: HTMLElement): void {
   const actor = app.actor;
   const consumableManager = game.banelands?.consumables;
 
   if (!consumableManager) return;
 
-  // Find a good place to insert consumables (this will vary by system)
-  let insertTarget: Element | null = null;
+  // Find the inventory tab using Dragonbane AppV2 selectors
+  const inventoryTab = element.querySelector('.tab[data-group="primary"][data-tab="inventory"]');
+  if (!inventoryTab) return;
 
-  // Try to find system-specific insertion points
-  if (game.system.id === 'dragonbane') {
-    // Look for Dragonbane inventory tab, specifically after the currency section
-    const inventoryTab = html.find('.sheet-body .tab[data-tab="inventory"]')[0];
-    if (inventoryTab) {
-      // Try to find currency section to insert after
-      const currencySection = html.find('.currency, .money, [data-group="currency"]').last()[0];
-      insertTarget = currencySection || inventoryTab;
-    }
-
-    // Fallback to main tab if inventory not found
-    if (!insertTarget) {
-      insertTarget =
-        html.find('.sheet-body .tab[data-tab="main"]')[0] || html.find('.sheet-body')[0] || null;
-    }
-  } else {
-    // Generic fallback - try inventory first, then main
-    insertTarget =
-      html.find('.tab[data-tab="inventory"]')[0] ||
-      html.find('.sheet-body')[0] ||
-      html.find('.window-content')[0] ||
-      null;
-  }
-
-  if (!insertTarget) return;
+  // Find the currency derived-stat-box to insert after
+  const currencyBox = inventoryTab.querySelector('.derived-stat-box');
+  if (!currencyBox) return;
 
   // Get consumable data
   const consumables = consumableManager.getConsumableDisplay(actor);
@@ -101,10 +70,10 @@ function addConsumableDisplay(
             <td>
               <select class="resource-die-select" data-consumable="${consumable.type}">
                 <option value="" ${consumable.depleted ? 'selected' : ''}>—</option>
-                <option value="d6" ${!consumable.depleted && consumable.die === 'D6' ? 'selected' : ''}>⬛ D6</option>
-                <option value="d8" ${!consumable.depleted && consumable.die === 'D8' ? 'selected' : ''}>◆ D8</option>
-                <option value="d10" ${!consumable.depleted && consumable.die === 'D10' ? 'selected' : ''}>🔸 D10</option>
-                <option value="d12" ${!consumable.depleted && consumable.die === 'D12' ? 'selected' : ''}>🔹 D12</option>
+                <option value="d6" ${!consumable.depleted && consumable.die === 'D6' ? 'selected' : ''}>D6</option>
+                <option value="d8" ${!consumable.depleted && consumable.die === 'D8' ? 'selected' : ''}>D8</option>
+                <option value="d10" ${!consumable.depleted && consumable.die === 'D10' ? 'selected' : ''}>D10</option>
+                <option value="d12" ${!consumable.depleted && consumable.die === 'D12' ? 'selected' : ''}>D12</option>
               </select>
             </td>
           </tr>
@@ -115,57 +84,53 @@ function addConsumableDisplay(
     </div>
   `;
 
-  // Insert the HTML - after currency section if found, otherwise at end of container
-  const isCurrencySection =
-    insertTarget.classList?.contains('currency') ||
-    insertTarget.classList?.contains('money') ||
-    insertTarget.hasAttribute?.('data-group');
+  // Insert after the currency derived-stat-box
+  currencyBox.insertAdjacentHTML('afterend', consumablesHtml);
 
-  if (isCurrencySection) {
-    insertTarget.insertAdjacentHTML('afterend', consumablesHtml);
-  } else {
-    insertTarget.insertAdjacentHTML('beforeend', consumablesHtml);
-  }
+  // Add event listeners for rolling resource dice (native DOM)
+  const rollButtons = element.querySelectorAll<HTMLElement>('.roll-resource-die');
+  rollButtons.forEach(button => {
+    button.addEventListener('click', async event => {
+      event.preventDefault();
+      const target = event.currentTarget as HTMLElement;
+      const consumableType = target.dataset.consumable;
 
-  // Add event listeners for rolling resource dice (clicking the labels)
-  html.find('.roll-resource-die').on('click', async event => {
-    event.preventDefault();
-    const $target = $(event.currentTarget);
-    const consumableType = $target.data('consumable');
+      // Don't roll if the resource is depleted
+      if (target.closest('tr')?.classList.contains('depleted')) {
+        return;
+      }
 
-    // Don't roll if the resource is depleted
-    if ($target.closest('tr').hasClass('depleted')) {
-      return;
-    }
-
-    if (consumableType && consumableManager) {
-      await consumableManager.useConsumable(actor, consumableType as ConsumableId);
-      app.render(); // Re-render the sheet to update display
-    }
+      if (consumableType && consumableManager) {
+        await consumableManager.useConsumable(actor, consumableType as ConsumableId);
+        app.render();
+      }
+    });
   });
 
-  // Add event listeners for manual die type changes
-  html.find('.resource-die-select').on('change', async event => {
-    const $target = $(event.currentTarget);
-    const consumableType = $target.data('consumable');
-    const newDieType = $target.val() as string;
+  // Add event listeners for manual die type changes (native DOM)
+  const selects = element.querySelectorAll<HTMLSelectElement>('.resource-die-select');
+  selects.forEach(select => {
+    select.addEventListener('change', async event => {
+      const target = event.currentTarget as HTMLSelectElement;
+      const consumableType = target.dataset.consumable;
+      const newDieType = target.value;
 
-    if (consumableType && consumableManager) {
-      if (newDieType === '' || newDieType === '—') {
-        // Set as depleted
-        const consumables = consumableManager.getActorConsumables(actor);
-        consumables[consumableType as ConsumableId].depleted = true;
-        await consumableManager.setActorConsumables(actor, consumables);
-      } else {
-        // Set the new die type
-        await consumableManager.setResourceDie(
-          actor,
-          consumableType as ConsumableId,
-          newDieType as any
-        );
+      if (consumableType && consumableManager) {
+        if (newDieType === '' || newDieType === '—') {
+          // Set as depleted
+          const consumables = consumableManager.getActorConsumables(actor);
+          consumables[consumableType as ConsumableId].depleted = true;
+          await consumableManager.setActorConsumables(actor, consumables);
+        } else {
+          await consumableManager.setResourceDie(
+            actor,
+            consumableType as ConsumableId,
+            newDieType as any
+          );
+        }
+        app.render();
       }
-      app.render(); // Re-render the sheet to update display
-    }
+    });
   });
 }
 

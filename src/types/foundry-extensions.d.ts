@@ -69,13 +69,7 @@ declare global {
 
   interface Window {
     BaneLands?: typeof game.banelands;
-    $: unknown;
-    jQuery: unknown;
   }
-
-  // Global test environment variables
-  const $: unknown;
-  const jQuery: unknown;
 
   // Make global variables available to tests
   var game: Game;
@@ -85,8 +79,6 @@ declare global {
 
   // Extend global object for test environment
   interface Global {
-    $: unknown;
-    jQuery: unknown;
     game: Game;
     ui: UI;
     Hooks: HooksManager;

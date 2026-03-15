@@ -1,31 +1,5 @@
 // Import types for test environment
 
-// Mock jQuery
-const mockJQuery = () => ({
-  find: vi.fn().mockReturnThis(),
-  on: vi.fn().mockReturnThis(),
-  off: vi.fn().mockReturnThis(),
-  html: vi.fn().mockReturnThis(),
-  append: vi.fn().mockReturnThis(),
-  remove: vi.fn().mockReturnThis(),
-  addClass: vi.fn().mockReturnThis(),
-  removeClass: vi.fn().mockReturnThis(),
-  hasClass: vi.fn(() => false),
-  attr: vi.fn().mockReturnThis(),
-  data: vi.fn().mockReturnThis(),
-  val: vi.fn().mockReturnThis(),
-  text: vi.fn().mockReturnThis(),
-  each: vi.fn().mockReturnThis(),
-  length: 0,
-  get: vi.fn(() => undefined),
-  [Symbol.iterator]: function* () {
-    // Make it iterable
-  },
-});
-
-global.$ = vi.fn(mockJQuery);
-global.jQuery = global.$;
-
 // Mock Foundry globals
 global.game = {
   user: {
