@@ -88,8 +88,8 @@ Access module settings through Foundry's Module Settings interface:
 
 ## Compatibility
 
-- **Required**: Foundry VTT v13+
-- **Recommended**: Dragonbane game system
+- **Required**: Foundry VTT v14+
+- **Recommended**: Dragonbane game system v4.0.0+
 - **Optional**: Journeys & Jamborees module (planned integration)
 
 ## Roadmap

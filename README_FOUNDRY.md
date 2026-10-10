@@ -50,7 +50,7 @@ Track your party's essential supplies using an innovative step-die mechanic:
 
 ## Technical Details
 
-- **Foundry v13+ Compatible**: Built for the latest Foundry VTT features
+- **Foundry v14+ Compatible**: Built for the latest Foundry VTT features
 - **Dragonbane Optimized**: Seamless integration with Dragonbane character sheets and mechanics
 - **Performance Focused**: Lightweight implementation that won't slow down your game
 - **API Available**: Other module developers can integrate with BaneLands systems

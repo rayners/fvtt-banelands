@@ -2,10 +2,10 @@
   "id": "banelands",
   "title": "BaneLands",
   "description": "Implements Forbidden Lands-inspired resource mechanics for the Dragonbane system in Foundry VTT. Features step-die consumable tracking for food, water, arrows, and torches with character sheet integration.",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "compatibility": {
-    "minimum": "13",
-    "verified": "13"
+    "minimum": "14",
+    "verified": "14"
   },
   "authors": [
     {
@@ -31,7 +31,7 @@
         "id": "dragonbane",
         "type": "system",
         "compatibility": {
-          "minimum": "3.0.3"
+          "minimum": "4.0.0"
         }
       }
     ],

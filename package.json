@@ -1,6 +1,6 @@
 {
   "name": "banelands",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Forbidden Lands mechanics for Dragonbane in Foundry VTT",
   "type": "module",
   "main": "dist/module.js",
@@ -25,7 +25,7 @@
     "validate": "npm run lint && npm run format:check && npm run typecheck && npm run test:run && npm run build",
     "link-module": "node ../foundry-dev-tools/scripts/link-module.js",
     "link-electron": "node ../foundry-dev-tools/scripts/link-module.js ~/Library/Application\\ Support/FoundryVTT/Data/modules",
-    "link-node": "node ../foundry-dev-tools/scripts/link-module.js ~/foundry-versions/13.344-data/modules",
+    "link-node": "node ../foundry-dev-tools/scripts/link-module.js ~/foundry-versions/14-data/Data/modules",
     "link-copy": "node ../foundry-dev-tools/scripts/link-module.js --copy",
     "prepare": "npm run build"
   },

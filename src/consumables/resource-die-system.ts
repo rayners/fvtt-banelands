@@ -103,7 +103,7 @@ export class ResourceDieSystem {
 
     await ChatMessage.create({
       content,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      style: CONST.CHAT_MESSAGE_STYLES.OTHER,
       sound: CONFIG.sounds.dice,
     });
   }

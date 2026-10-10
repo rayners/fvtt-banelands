@@ -16,6 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced Dragonbane system integration
 - Journeys & Jamborees module integration
 
+## [1.0.0] - 2026-10-10
+
+### Changed
+
+- **Breaking:** Require Foundry VTT v14 and Dragonbane v4.0.0+ (Dragonbane v4 itself requires Foundry v14). Foundry v13 and Dragonbane 3.x are no longer supported; stay on 0.1.2 for those.
+
+### Fixed
+
+- Resource die chat messages no longer rely on `CONST.CHAT_MESSAGE_TYPES`, which is removed in Foundry v14.
+
 ## [0.1.2] - 2026-03-14
 
 ### Fixed
