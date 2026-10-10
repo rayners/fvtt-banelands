@@ -25,7 +25,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Environment (please complete the following information):**
 
-- Foundry VTT Version: [e.g. v13.331]
+- Foundry VTT Version: [e.g. v14.366]
 - Game System: [e.g. Dragonbane v1.2.3]
 - BaneLands Version: [e.g. v0.1.0]
 - Browser: [e.g. Chrome, Firefox]
