@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { ResourceDieSystem } from '../src/consumables/resource-die-system';
 
 describe('ResourceDieSystem', () => {
@@ -106,6 +106,42 @@ describe('ResourceDieSystem', () => {
 
       const encumbrance = resourceDieSystem.calculateEncumbrance(resourceDice);
       expect(encumbrance).toBe(0);
+    });
+  });
+
+  describe('rollResourceDie chat message', () => {
+    const create = vi.fn<(data: Record<string, unknown>) => Promise<void>>();
+
+    beforeEach(() => {
+      create.mockReset();
+      vi.stubGlobal('Roll', function () {
+        return { evaluate: async () => ({ total: 1 }) };
+      });
+      vi.stubGlobal('ChatMessage', { create });
+      // Foundry v14 only exposes CHAT_MESSAGE_STYLES; CHAT_MESSAGE_TYPES was removed
+      vi.stubGlobal('CONST', { CHAT_MESSAGE_STYLES: { OTHER: 0 } });
+      vi.stubGlobal('CONFIG', { sounds: { dice: 'sounds/dice.wav' } });
+    });
+
+    afterEach(() => {
+      vi.unstubAllGlobals();
+    });
+
+    it('creates the chat message with a style and no legacy type', async () => {
+      await resourceDieSystem.rollResourceDie('d6');
+
+      expect(create).toHaveBeenCalledTimes(1);
+      const data = create.mock.calls[0]![0];
+      expect(data.style).toBe(0);
+      expect(data).not.toHaveProperty('type');
+      expect(data.sound).toBe('sounds/dice.wav');
+    });
+
+    it('reports depletion in the chat message', async () => {
+      const { depleted } = await resourceDieSystem.rollResourceDie('d6');
+
+      expect(depleted).toBe(true);
+      expect(create.mock.calls[0]![0].content).toContain('Resource Depleted!');
     });
   });
 });
