@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Require Foundry VTT v14 and Dragonbane v4.0.0+ (Dragonbane v4 itself requires Foundry v14). Foundry v13 and Dragonbane 3.x are no longer supported.
+
+### Fixed
+
+- Resource die chat messages no longer rely on `CONST.CHAT_MESSAGE_TYPES`, which is removed in Foundry v14.
+
 ### Planned
 
 - Hex-based journey system with terrain types

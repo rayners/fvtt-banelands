@@ -45,8 +45,8 @@ declare global {
 
   // Constants interface
   interface CONST {
-    CHAT_MESSAGE_TYPES: {
-      ROLL: number;
+    CHAT_MESSAGE_STYLES: {
+      OTHER: number;
     };
   }
 

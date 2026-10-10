@@ -89,7 +89,7 @@ src/
 
 ### Dragonbane AppV2 Integration
 
-- **Target**: Dragonbane 3.0.3+ (uses `HandlebarsApplicationMixin(ActorSheetV2)`)
+- **Target**: Dragonbane 4.0.0+ (requires Foundry 14) (uses `HandlebarsApplicationMixin(ActorSheetV2)`)
 - **Hook**: `renderDoDCharacterSheet` (class-based AppV2 hook, NOT `renderActorSheet`)
 - **Hook signature**: `(app, element: HTMLElement, context, options)` — native DOM, no jQuery
 - **DOM safe**: AppV2 `_replaceHTML` fully replaces part HTML before hooks fire, so `insertAdjacentHTML` in hooks does not cause duplication on re-render
